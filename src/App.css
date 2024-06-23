@@ -19,7 +19,7 @@ li {
     width: 2em;
 }
 
-.animal-type{
+.type {
     flex-grow: 1;
     min-width: 7em;
 }
@@ -27,10 +27,10 @@ li {
 li button {
     width: 7em;
     margin-left: 1em;
-    border-color: transparent; 
+    border-color: transparent;
 }
 
-li button:hover{
+li button:hover {
     font-weight: bold;
     border-color: rgba(238, 119, 21, 0.5);
 }

@@ -1,49 +1,8 @@
 import { useState } from "react";
+import ListItem from "../ListItem/ListItem";
 
 
-function ButtonState({stateLabel, stateHandler}) {
-    return <button onClick={stateHandler}>{stateLabel}</button>
-}
-
-function ButtonDelete({index, deleteItemHandler}) {
-    return <button onClick={() => deleteItemHandler(index)}>Delete</button>
-}
-
-
-function ListItem({index, animal, deleteItemHandler}) {
-
-    const [stateLabel, setStateLabel ] = useState('Activate')
-    const [elementStyle, setElementStyle] =useState({})
-
-    const elementStyles =
-        {
-            Activate :  {color: 'green', fontWeight: 'bold'},
-            Deactivate :  {}
-        }
-
-    const stateHandler = () => {
-
-        setStateLabel ( (stateLabel) => 
-             stateLabel === 'Activate' ? 'Deactivate' : 'Activate' 
-        )
-
-        setElementStyle(() =>  
-            elementStyles[stateLabel]
-        )
-
-    }
-
-    return (
-        <li key={index} style={elementStyle}>
-            <span className="icon"> {animal.icon} </span>
-            <span className="animal-type"> {animal.type} </span> 
-            <ButtonState stateLabel={stateLabel} stateHandler={stateHandler} />
-            <ButtonDelete index={index} deleteItemHandler={deleteItemHandler} />
-        </li> 
-    )
-}
-
-function List({animals:propsAnimals}) {
+function List({ animals: propsAnimals }) {
 
     const [animals, setAnimalsList] = useState(propsAnimals)
 
@@ -55,13 +14,13 @@ function List({animals:propsAnimals}) {
         })
     }
 
-    return animals.some( animal => animal) ?  (
-            <ul> 
-            {animals.map ((animal, index) => 
-                animal ? <ListItem key={index} animal={animal} index={index} deleteItemHandler={deleteItemHandler}/> : null
-            )} 
+    return (
+        animals.some(animal => animal) ? <ul>
+            {animals.map((animal, index) =>
+                animal ? <ListItem key={index} list={animal} index={index} deleteItemHandler={deleteItemHandler} /> : null
+            )}
         </ul>
-    ) : null
+            : null)
 }
 
 export default List;
