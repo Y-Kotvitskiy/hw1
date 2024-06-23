@@ -1,8 +1,7 @@
 import { useState } from "react"
-import ButtonState from "../ButtonState/ButtonState"
-import ButtonDelete from "../ButtonDelete/ButtonDelete"
+import ButtonState from "./ButtonState/ButtonState"
 
-export default function ListItem({ index, list, deleteItemHandler }) {
+export default function ListItem({ list = [], deleteItemHandler }) {
 
     const [stateLabel, setStateLabel] = useState('Activate')
     const [elementStyle, setElementStyle] = useState({})
@@ -26,11 +25,11 @@ export default function ListItem({ index, list, deleteItemHandler }) {
     }
 
     return (
-        <li key={index} style={elementStyle}>
+        <li style={elementStyle}>
             <span className="icon"> {list.icon} </span>
             <span className="type"> {list.type} </span>
             <ButtonState stateLabel={stateLabel} stateHandler={stateHandler} />
-            <ButtonDelete index={index} deleteItemHandler={deleteItemHandler} />
+            <button  onClick ={deleteItemHandler}>Delete</button>
         </li>
     )
 }
