@@ -10,7 +10,7 @@ function ButtonDelete({index, deleteItemHandler}) {
 }
 
 
-function ListItem({index, animal,deleteItemHandler}) {
+function ListItem({index, animal, deleteItemHandler}) {
 
     const [stateLabel, setStateLabel ] = useState('Activate')
     const [elementStyle, setElementStyle] =useState({})
@@ -50,19 +50,17 @@ function List({animals:propsAnimals}) {
     const deleteItemHandler = (index) => {
         console.log(index);
         setAnimalsList((animals) => {
-            animals.splice(index, 1)
-            console.log(animals)
+            animals.splice(index, 1, null)
             return [...animals];
         })
     }
 
-    return animals.length ? (
+    return animals.some( animal => animal) ?  (
             <ul> 
             {animals.map ((animal, index) => 
-                <ListItem key={index} animal={animal} index={index} deleteItemHandler={deleteItemHandler}/>
+                animal ? <ListItem key={index} animal={animal} index={index} deleteItemHandler={deleteItemHandler}/> : null
             )} 
         </ul>
-
     ) : null
 }
 
